@@ -44,8 +44,8 @@ export function ChatHeader({
           </div>
         </div>
 
-        <div className="flex w-full flex-wrap items-end gap-2 sm:w-auto">
-          <label className="flex min-w-[140px] flex-1 flex-col gap-1 sm:flex-none">
+        <div className="flex w-full items-end gap-2 sm:w-auto">
+          <div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-none">
             <span className="text-xs font-medium text-zinc-500">Vastuse stiil</span>
             <Select value={answerStyle} onValueChange={(v) => onStyleChange(v as AnswerStyle)} disabled={disabled}>
               <SelectTrigger className="sm:w-36" aria-label="Vastuse stiil">
@@ -56,34 +56,40 @@ export function ChatHeader({
                 <SelectItem value="detailed">Põhjalik</SelectItem>
               </SelectContent>
             </Select>
-          </label>
+          </div>
 
-          <label className="flex min-w-[160px] flex-1 flex-col gap-1 sm:flex-none">
+          <div className="flex min-w-0 flex-[1.4] flex-col gap-1 sm:flex-none">
             <span className="text-xs font-medium text-zinc-500">Sihtrühm</span>
-            <Select
-              value={personaId ?? NO_PERSONA}
-              onValueChange={(v) => onPersonaChange(v === NO_PERSONA ? null : v)}
-              disabled={disabled}
-            >
-              <SelectTrigger className="sm:w-48" aria-label="Sihtrühm">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={NO_PERSONA}>Määramata</SelectItem>
-                {personas.map((p) => (
-                  <SelectItem key={p.id} value={p.id}>
-                    {p.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </label>
-
-          <Button variant="secondary" onClick={onManagePersonas} title="Halda sihtrühmi">
-            <Users />
-            <span className="hidden lg:inline">Halda sihtrühmi</span>
-            <span className="sr-only lg:hidden">Halda sihtrühmi</span>
-          </Button>
+            <div className="flex gap-2">
+              <Select
+                value={personaId ?? NO_PERSONA}
+                onValueChange={(v) => onPersonaChange(v === NO_PERSONA ? null : v)}
+                disabled={disabled}
+              >
+                <SelectTrigger className="min-w-0 flex-1 sm:w-48" aria-label="Sihtrühm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={NO_PERSONA}>Määramata</SelectItem>
+                  {personas.map((p) => (
+                    <SelectItem key={p.id} value={p.id}>
+                      {p.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button
+                variant="secondary"
+                className="w-11 px-0 lg:w-auto lg:px-4"
+                onClick={onManagePersonas}
+                title="Halda sihtrühmi"
+              >
+                <Users />
+                <span className="hidden lg:inline">Halda sihtrühmi</span>
+                <span className="sr-only lg:hidden">Halda sihtrühmi</span>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </header>

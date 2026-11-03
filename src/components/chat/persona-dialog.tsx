@@ -134,7 +134,7 @@ export function PersonaDialog({ open, personas, onOpenChange, onChanged }: Perso
                 <li key={p.id} className="flex items-start gap-2 p-3">
                   <div className="min-w-0 flex-1">
                     <p className="font-medium text-zinc-900">{p.name}</p>
-                    <p className="text-xs text-violet-700">{AUDIENCE_LABELS[p.audience] ?? p.audience}</p>
+                    <p className="text-xs text-violet-700">Vastuste eelistus: {AUDIENCE_LABELS[p.audience] ?? p.audience}</p>
                     {p.content && <p className="mt-1 text-sm text-zinc-500">{p.content}</p>}
                   </div>
                   {pendingDelete === p.id ? (

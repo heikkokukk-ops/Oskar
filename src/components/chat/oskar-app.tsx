@@ -87,6 +87,7 @@ export function OskarApp() {
     // An empty chat is already a new chat; avoid piling up empty sessions.
     if (active && active.messages.length === 0) {
       setSidebarOpen(false);
+      toast("Uus vestlus on juba avatud.");
       return;
     }
     try {
