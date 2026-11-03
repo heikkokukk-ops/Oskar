@@ -53,7 +53,7 @@ export function Composer({ disabled, canClear, onSend, onClear }: ComposerProps)
   }
 
   return (
-    <div className="border-t border-zinc-200 bg-white px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
+    <div className="border-t border-zinc-200 bg-white px-4 pb-3 pt-3">
       <div className="mx-auto max-w-3xl">
         {attachment && (
           <div className="mb-2 inline-flex max-w-full items-center gap-1 rounded-full border border-zinc-200 bg-zinc-50 py-1 pl-3 pr-1 text-sm text-zinc-700">
