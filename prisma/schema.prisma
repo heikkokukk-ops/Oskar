@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ChatSession {
+  id          String        @id @default(cuid())
+  title       String        @default("Uus vestlus")
+  answerStyle String        @default("short") // "short" | "detailed"
+  personaId   String?
+  persona     SystemPrompt? @relation(fields: [personaId], references: [id], onDelete: SetNull)
+  temperature Float         @default(0.5)
+  topP        Float         @default(0.9)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  messages    Message[]
+}
+
+model Message {
+  id               String      @id @default(cuid())
+  sessionId        String
+  session          ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  role             String // "user" | "assistant"
+  content          String
+  sourceTopic      String?
+  knowledgeEntryId Int?
+  rating           Int? // 1 or -1
+  createdAt        DateTime    @default(now())
+
+  @@index([sessionId, createdAt])
+}
+
+model SystemPrompt {
+  id        String        @id @default(cuid())
+  name      String
+  content   String
+  audience  String        @default("all") // "all" | "manager" | "office" | "it"
+  createdAt DateTime      @default(now())
+  sessions  ChatSession[]
+}
+
+model KnowledgeEntry {
+  id             Int    @id
+  topic          String
+  question       String
+  answerShort    String
+  answerDetailed String
+  keywords       String
+  audience       String
+}
