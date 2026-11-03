@@ -239,7 +239,7 @@ export function OskarApp() {
   const disabled = !active || loading;
 
   return (
-    <div className="flex h-dvh overflow-hidden">
+    <div className="flex min-h-0 flex-1 overflow-hidden">
       <Sidebar
         chats={chats}
         activeId={active?.id ?? null}
